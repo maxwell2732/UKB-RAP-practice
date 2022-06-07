@@ -1,0 +1,160 @@
+# Step 1: Merge /Genotype calls/ bed/fam/bim files together:
+
+plink --merge-list 220605_files_to_merge.txt --make-bed --autosome-xy --out ukb22418_c1_22_v2_merged
+
+# Step 2: QC
+
+plink2 --bfile ukb22418_c1_22_v2_merged --keep regularfizzy_microarray_df.phe --autosome --maf 0.01 --mac 20 --geno 0.1 --hwe 1e-15 --mind 0.1 --write-snplist --write-samples --no-id-header --out 220606_array_snps_qc_pass
+
+# Step 3: Regenie #1 
+# Remember to select for the proper 'instance type' to avoid 'Out of memory' before analyzing
+
+regenie --step 1 --bed ukb22418_c1_22_v2_merged --phenoFile regularfizzy_microarray_df.phe --extract 220606_array_snps_qc_pass.snplist --phenoCol regularfizzy_cc --bsize 1000 --lowmem --out 220606_regularfizzy --bt --loocv --threads 20 --gz
+
+
+
+=================================
+==            Log              ==  
+=================================
+
+Downloading bundled file bgen.tar.gz
+>>> Unpacking bgen.tar.gz to /
+tar: Removing leading `/' from member names
+dxpy/0.323.0 (Linux-5.4.0-1072-aws-x86_64-with-glibc2.29)
+/usr/sbin/rsyslogd already running.
+/usr/sbin/sshd already running.
+downloading file: file-GBKpb2jJQ8F2Z96fPX72P1zy to filesystem: /home/dnanexus/in/in/0/220606_array_snps_qc_pass.id
+downloading file: file-GBKpb2jJQ8FFpVVQ6zFvPFQ2 to filesystem: /home/dnanexus/in/in/1/220606_array_snps_qc_pass.snplist
+downloading file: file-GBKJyfQJ6jF5zf5JPV45306f to filesystem: /home/dnanexus/in/in/2/regularfizzy_microarray_df.phe
+downloading file: file-GBKkxx8JjKQQBg3ZPXFB0j8Z to filesystem: /home/dnanexus/in/in/3/ukb22418_c1_22_v2_merged.bed
+downloading file: file-GBKkxx8JjKQXbYBZ6yqkJZxv to filesystem: /home/dnanexus/in/in/4/ukb22418_c1_22_v2_merged.bim
+downloading file: file-GBKkxx8JjKQXZYjZPP6X6y2K to filesystem: /home/dnanexus/in/in/5/ukb22418_c1_22_v2_merged.fam
+Using dxfuse version v1.0.0
+The log file is located at /root/.dxfuse/dxfuse.log
+starting fs daemon
+wait for ready
+Daemon started successfully
+Downloading files using 8 threads+ [[ '' == '' ]]
++ eval 'regenie --step 1 --bed ukb22418_c1_22_v2_merged --phenoFile regularfizzy_microarray_df.phe --extract 220606_array_snps_qc_pass.snplist --phenoCol regularfizzy_cc --bsize 1000 --lowmem --out 220606_regularfizzy --bt --loocv --threads 20 --gz'
+++ regenie --step 1 --bed ukb22418_c1_22_v2_merged --phenoFile regularfizzy_microarray_df.phe --extract 220606_array_snps_qc_pass.snplist --phenoCol regularfizzy_cc --bsize 1000 --lowmem --out 220606_regularfizzy --bt --loocv --threads 20 --gz
+Start time: Mon Jun  6 21:06:50 2022
+              |=============================|
+              |      REGENIE v3.1.1.gz      |
+              |=============================|
+Copyright (c) 2020-2022 Joelle Mbatchou, Andrey Ziyatdinov and Jonathan Marchini.
+Distributed under the MIT License.
+Compiled with Boost Iostream library.
+Log of output saved in file : 220606_regularfizzy.log
+Options in effect:
+  --step 1 \
+  --bed ukb22418_c1_22_v2_merged \
+  --phenoFile regularfizzy_microarray_df.phe \
+  --extract 220606_array_snps_qc_pass.snplist \
+  --phenoCol regularfizzy_cc \
+  --bsize 1000 \
+  --lowmem \
+  --out 220606_regularfizzy \
+  --bt \
+  --loocv \
+  --threads 20 \
+  --gz 
+Fitting null model
+ * bim              : [ukb22418_c1_22_v2_merged.bim] n_snps = 784256
+   -keeping variants specified by --extract
+   -number of variants remaining in the analysis = 602104
+ * fam              : [ukb22418_c1_22_v2_merged.fam] n_samples = 488377
+ * bed              : [ukb22418_c1_22_v2_merged.bed]
+ * phenotypes       : [regularfizzy_microarray_df.phe] n_pheno = 1
+   -dropping observations with missing values at any of the phenotypes
+   -number of phenotyped individuals with no missing data = 125577
+ * number of individuals used in analysis = 125577
+ * case-control counts for each trait:
+   - 'regularfizzy_cc': 18656 cases and 106921 controls
+   -fitting null logistic regression on binary phenotypes...done (82ms) 
+   -residualizing and scaling phenotypes...done (2ms) 
+ * # threads        : [20]
+ * block size       : [1000]
+ * # blocks         : [614] for 602104 variants
+ * # CV folds       : [125577]
+ * ridge data_l0    : [5 : 0.01 0.25 0.5 0.75 0.99 ]
+ * ridge data_l1    : [5 : 0.01 0.25 0.5 0.75 0.99 ]
+ * approximate memory usage : 13GB
+ * writing level 0 predictions to disk
+   -temporary files will have prefix [220606_regularfizzy_l0_Y]
+   -approximate disk space needed : 12GB
+ * setting memory...done
+Chromosome 1
+ block [1] : 1000 snps  (2441ms) 
+   -residualizing and scaling genotypes...done (6407ms) 
+   -calc working matrices...done (47756ms) 
+   -calc level 0 ridge...done (18133ms) 
+ block [2] : 1000 snps  (2070ms) 
+   -residualizing and scaling genotypes...done (6236ms) 
+   -calc working matrices...done (48005ms) 
+   -calc level 0 ridge...done (18429ms)   
+ block [3] : 1000 snps  (2202ms) 
+   -residualizing and scaling genotypes...done (6345ms) 
+   -calc working matrices...done (47122ms) 
+   -calc level 0 ridge...done (18221ms) 
+ block [4] : 1000 snps  (2049ms) 
+   -residualizing and scaling genotypes...done (6274ms) 
+   -calc working matrices...done (46991ms) 
+   -calc level 0 ridge...done (18017ms) 
+ block [5] : 1000 snps  (2186ms) 
+   -residualizing and scaling genotypes...done (6228ms) 
+   -calc working matrices...done (46593ms) 
+   -calc level 0 ridge...done (18296ms) 
+ block [6] : 1000 snps  (2137ms) 
+   -residualizing and scaling genotypes...done (6336ms) 
+   -calc working matrices...done (47094ms) 
+   -calc level 0 ridge...done (18520ms) 
+ block [7] : 1000 snps  (2144ms) 
+   -residualizing and scaling genotypes...done (6262ms) 
+   -calc working matrices...done (46199ms) 
+   -calc level 0 ridge...done (17993ms) 
+ block [8] : 1000 snps  (2126ms) 
+   -residualizing and scaling genotypes...done (6194ms) 
+   -calc working matrices...done (46676ms) 
+   -calc level 0 ridge...done (17770ms) 
+ block [9] : 1000 snps  (2278ms) 
+   -residualizing and scaling genotypes...done (6179ms) 
+   .
+   .
+   .
+-calc level 0 ridge...done (10398ms) 
+ Level 1 ridge with logistic regression...
+CPU: 78% (16 cores) * Memory: 13794/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 91% (16 cores) * Memory: 14893/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 38% (16 cores) * Memory: 14898/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 27% (16 cores) * Memory: 15922/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 78% (16 cores) * Memory: 14953/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 7% (16 cores) * Memory: 14896/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 73% (16 cores) * Memory: 15992/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 32% (16 cores) * Memory: 14897/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 33% (16 cores) * Memory: 15989/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 73% (16 cores) * Memory: 14899/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 7% (16 cores) * Memory: 14901/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 79% (16 cores) * Memory: 15851/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 26% (16 cores) * Memory: 14902/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+   -on phenotype 1 (regularfizzy_cc)...done (7597974ms) 
+Output
+------
+phenotype 1 (regularfizzy_cc) : 
+  0.01  : Rsq = 0.00433695, MSE = 0.125981, -logLik/N = 0.418218
+  0.25  : Rsq = 0.00680388, MSE = 0.125923, -logLik/N = 0.417824<- min value
+  0.5   : Rsq = 0.00746832, MSE = 0.126053, -logLik/N = 0.418188
+  0.75  : Rsq = 0.00799024, MSE = 0.126209, -logLik/N = 0.418643
+  0.99  : Rsq = 0.0100387, MSE = 0.126445, -logLik/N = 0.419187
+CPU: 39% (16 cores) * Memory: 14902/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 90% (16 cores) * Memory: 15850/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+CPU: 7% (16 cores) * Memory: 15854/31310MB * Storage: 104/1603GB * Net: 0↓/0↑MBps
+  * making predictions...writing LOCO predictions...done (1659338ms) 
+List of blup files written to: [220606_regularfizzy_pred.list]
+Elapsed time : 57506.3s
+End time: Tue Jun  7 13:05:17 2022
++ set +x
+uploading file: /home/dnanexus/out/out/220606_regularfizzy.log -> /220606_regularfizzy.log
+uploading file: /home/dnanexus/out/out/220606_regularfizzy_pred.list -> /220606_regularfizzy_pred.list
+uploading file: /home/dnanexus/out/out/220606_regularfizzy_1.loco.gz -> /220606_regularfizzy_1.loco.gz
+
+  
