@@ -1,0 +1,11 @@
+# Use CLI-SAK to convert bgen/sample into bed/fam/bim:
+# Open Anaconda Powershell Prompt
+
+# Login:
+dx login
+
+# Call plink2 in SAK:
+# Convert ukb22828_c7_b0_v3.bgen into ukb22828_c7_b0_v3.bed and save into /regularfizzy_GWAS/
+
+dx run swiss-army-knife -iin="/regularfizzy_GWAS/ukb22828_c7_b0_v3.bgen"  -iin="/regularfizzy_GWAS/ukb22828_c7_b0_v3.sample" -icmd="plink2 --bgen ukb22828_c7_b0_v3.bgen ref-first --sample ukb22828_c7_b0_v3.sample --make-bed --out ukb22828_c7" --tag="Step1" --instance-type "mem1_ssd1_v2_x16" --destination="/regularfizzy_GWAS/" --brief --yes
+
