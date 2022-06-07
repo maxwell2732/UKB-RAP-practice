@@ -12,7 +12,8 @@ plink2 --bfile ukb22418_c1_22_v2_merged --keep regularfizzy_microarray_df.phe --
 regenie --step 1 --bed ukb22418_c1_22_v2_merged --phenoFile regularfizzy_microarray_df.phe --extract 220606_array_snps_qc_pass.snplist --phenoCol regularfizzy_cc --bsize 1000 --lowmem --out 220606_regularfizzy --bt --loocv --threads 20 --gz
 
 
-
+# RAN FOR 16h 5m
+# FINAL COST £10.2627
 =================================
 ==            Log              ==  
 =================================
