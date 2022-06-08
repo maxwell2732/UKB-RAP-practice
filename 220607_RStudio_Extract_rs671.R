@@ -21,10 +21,8 @@ library(rbgen)
 dd <- bgen.load("ukb22828_c12_b0_v3.bgen", rsid="rs671")
 print( dd$data[ 'rs671',, ] )
 
-# Load directly from RAP Project:
-dd <- bgen.load("/Bulk/Genotype Results/Imputation/UKB imputation from genotype/ukb22828_c7_b0_v3.bgen", rsid="rs2227264")
-dd <- bgen.load("/mnt/project/Bulk/Genotype Results/Imputation/UKB imputation from genotype/ukb22828_c7_b0_v3.bgen", rsid="rs2227264")
-
+# Load directly from RAP Project w/o download to R space:
+# dd <- bgen.load("/mnt/project/Bulk/Genotype Results/Imputation/UKB imputation from genotype/ukb22828_c7_b0_v3.bgen", rsid="rs2227264")
 
 # Generate rs671 dataframe
 rs671 <- dd$data[ 'rs671',, ] 
