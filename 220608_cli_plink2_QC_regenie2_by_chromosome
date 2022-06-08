@@ -1,0 +1,33 @@
+# 2022.06.08 
+# Use CLI-SAK to QC by chromosome in bed/fam/bim format:
+
+# Inputs: bed/fam/bim files converted from bgen/sample files
+
+# Open Anaconda Powershell Prompt
+# Login:
+dx login
+
+# Step 4: QC for each chromosome
+
+# Call plink2 in SAK:
+# QC of chromosome 9 and save into /regularfizzy_GWAS/
+# Use instance type: mem1_hdd1_v2_x16, which is 31.3 GB total memory, 1600 GB total storage, 16 cores
+
+# Chr 9, looks smaller
+
+dx run swiss-army-knife -iin="/regularfizzy_GWAS/regularfizzy_microarray_df.phe" -iin="/regularfizzy_GWAS/ukb22828_c9.bed" -iin="/regularfizzy_GWAS/ukb22828_c9.fam" -iin="/regularfizzy_GWAS/ukb22828_c9.bim" -icmd="plink2 --bfile ukb22828_c9 --no-pheno --keep regularfizzy_microarray_df.phe --autosome --maf 0.01 --mac 20 --geno 0.1 --hwe 1e-15 --mind 0.1 --write-snplist allow-dups --write-samples --no-id-header --out imputation_c9_snps_qc_pass" --tag="Step2" --instance-type "mem1_hdd1_v2_x16" --destination="/regularfizzy_GWAS/" --brief --yes
+
+
+# Step 5: Regenie #2 for each chromosome
+
+# Try chr 9 first
+# imputation_c9_snps_qc_pass.id
+# instance-type "mem2_ssd2_v2_x16"
+# 62.5 GB total memory, 1280 GB total storage, 16 cores
+# Estimated Cost Per Hour: £0.2672 OR £0.5632
+
+# regenie --step2 --bed ukb22828_c9 --out assoc.c9 --phenoFile regularfizzy_microarray_df.phe --bt --approx --firth-se --firth --extract imputation_c9_snps_qc_pass.snplist --phenoCol regularfizzy_cc --pred 220606_regularfizzy_pred.list --bsize 200 --pThresh 0.05 --min MAC 3 --threads 16 --gz
+
+dx run swiss-army-knife -iin="/regularfizzy_GWAS/regularfizzy_microarray_df.phe" -iin="/regularfizzy_GWAS/ukb22828_c9.bed" -iin="/regularfizzy_GWAS/ukb22828_c9.fam" -iin="/regularfizzy_GWAS/ukb22828_c9.bim" -iin="/regularfizzy_GWAS/imputation_c9_snps_qc_pass.snplist"  -iin="/regularfizzy_GWAS/220606_regularfizzy_1.loco.gz"  -iin="/regularfizzy_GWAS/220606_regularfizzy_pred.list" -icmd="regenie --step2 --bed ukb22828_c9 --out assoc.c9 --phenoFile regularfizzy_microarray_df.phe --bt --approx --firth-se --firth --extract imputation_c9_snps_qc_pass.snplist --phenoCol regularfizzy_cc --pred 220606_regularfizzy_pred.list --bsize 200 --pThresh 0.05 --min MAC 3 --threads 16 --gz" --tag="Step2" --instance-type "mem2_ssd2_v2_x16" --destination="/regularfizzy_GWAS/" --brief --yes
+
+
