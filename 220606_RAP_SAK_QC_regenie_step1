@@ -8,8 +8,23 @@ plink2 --bfile ukb22418_c1_22_v2_merged --keep regularfizzy_microarray_df.phe --
 
 # Step 3: Regenie #1 
 # Remember to select for the proper 'instance type' to avoid 'Out of memory' before analyzing
+# RAN FOR 16h 5m
+# FINAL COST £10.2627
 
 regenie --step 1 --bed ukb22418_c1_22_v2_merged --phenoFile regularfizzy_microarray_df.phe --extract 220606_array_snps_qc_pass.snplist --phenoCol regularfizzy_cc --bsize 1000 --lowmem --out 220606_regularfizzy --bt --loocv --threads 20 --gz
+
+
+# Step 4: QC for each chromosome
+# QC for chr 7 as an example: ukb22828_c7.bed
+# In Tools - SAK, select input files and in command line:
+# Remember to select for the proper 'instance type' to avoid 'Out of memory' before analyzing
+
+plink2 --bfile ukb22828_c7 --no-pheno --keep regularfizzy_microarray_df.phe --autosome --maf 0.01 --mac 20 --geno 0.1 --hwe 1e-15 --mind 0.1 --write-snplist allow-dups --write-samples --no-id-header --out imputation_c7_snps_qc_pass
+
+
+
+
+
 
 
 # RAN FOR 16h 5m
