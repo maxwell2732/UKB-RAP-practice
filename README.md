@@ -1,5 +1,5 @@
 # UKB-RAP-practice
-(c) by Chen Zhu 2022
+(C) by Chen Zhu 2022
 
 UK Biobank -- Research Analysis Platform
 
