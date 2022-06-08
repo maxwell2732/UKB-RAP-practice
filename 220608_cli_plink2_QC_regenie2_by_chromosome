@@ -26,8 +26,9 @@ dx run swiss-army-knife -iin="/regularfizzy_GWAS/regularfizzy_microarray_df.phe"
 # 62.5 GB total memory, 1280 GB total storage, 16 cores
 # Estimated Cost Per Hour: £0.2672 OR £0.5632
 
-# regenie --step2 --bed ukb22828_c9 --out assoc.c9 --phenoFile regularfizzy_microarray_df.phe --bt --approx --firth-se --firth --extract imputation_c9_snps_qc_pass.snplist --phenoCol regularfizzy_cc --pred 220606_regularfizzy_pred.list --bsize 200 --pThresh 0.05 --min MAC 3 --threads 16 --gz
+# regenie --step 2 --bed ukb22828_c9 --out assoc.c9 --phenoFile regularfizzy_microarray_df.phe --bt --approx --firth-se --firth --extract imputation_c9_snps_qc_pass.snplist --phenoCol regularfizzy_cc --pred 220606_regularfizzy_pred.list --bsize 200 --pThresh 0.05 --minMAC 3 --threads 16 --gz
 
-dx run swiss-army-knife -iin="/regularfizzy_GWAS/regularfizzy_microarray_df.phe" -iin="/regularfizzy_GWAS/ukb22828_c9.bed" -iin="/regularfizzy_GWAS/ukb22828_c9.fam" -iin="/regularfizzy_GWAS/ukb22828_c9.bim" -iin="/regularfizzy_GWAS/imputation_c9_snps_qc_pass.snplist"  -iin="/regularfizzy_GWAS/220606_regularfizzy_1.loco.gz"  -iin="/regularfizzy_GWAS/220606_regularfizzy_pred.list" -icmd="regenie --step2 --bed ukb22828_c9 --out assoc.c9 --phenoFile regularfizzy_microarray_df.phe --bt --approx --firth-se --firth --extract imputation_c9_snps_qc_pass.snplist --phenoCol regularfizzy_cc --pred 220606_regularfizzy_pred.list --bsize 200 --pThresh 0.05 --min MAC 3 --threads 16 --gz" --tag="Step2" --instance-type "mem2_ssd2_v2_x16" --destination="/regularfizzy_GWAS/" --brief --yes
+dx run swiss-army-knife -iin="/regularfizzy_GWAS/regularfizzy_microarray_df.phe" -iin="/regularfizzy_GWAS/ukb22828_c9.bed" -iin="/regularfizzy_GWAS/ukb22828_c9.fam" -iin="/regularfizzy_GWAS/ukb22828_c9.bim" -iin="/regularfizzy_GWAS/imputation_c9_snps_qc_pass.snplist"  -iin="/regularfizzy_GWAS/220606_regularfizzy_1.loco.gz"  -iin="/regularfizzy_GWAS/220606_regularfizzy_pred.list" -icmd="regenie --step 2 --bed ukb22828_c9 --out assoc.c9 --phenoFile regularfizzy_microarray_df.phe --bt --approx --firth-se --firth --extract imputation_c9_snps_qc_pass.snplist --phenoCol regularfizzy_cc --pred 220606_regularfizzy_pred.list --bsize 200 --pThresh 0.05 --minMAC 3 --threads 16 --gz" --tag="Step2" --instance-type "mem2_ssd2_v2_x16" --destination="/regularfizzy_GWAS/" --brief --yes
+
 
 
